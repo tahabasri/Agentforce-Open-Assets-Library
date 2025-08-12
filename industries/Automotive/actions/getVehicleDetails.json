@@ -1,0 +1,8 @@
+{
+    "sourceFile": "industries/Automotive/main/default/genAiFunctions/Custom_Get_Vehicle_Details",
+    "author": "Your Name",
+    "company": "Your Company",
+    "dependencies": [
+        "industries/Automotive/main/default/flows/Custom_Get_Vehicle_Details.flow-meta.xml"
+    ]
+}

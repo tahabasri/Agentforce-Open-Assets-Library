@@ -1,0 +1,15 @@
+{
+  "packageDirectories": [
+    {
+      "path": "dev/force-app",
+      "default": true
+    },
+    {
+      "path": "industries/healthcare"
+    }
+  ],
+  "name": "agentforceOpenAssetsLibrary",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "64.0"
+}
