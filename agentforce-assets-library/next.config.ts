@@ -2,9 +2,15 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: [
-      "wp.sfdcdigital.com",
-      "appexchange.salesforce.com"
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'wp.sfdcdigital.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'appexchange.salesforce.com',
+      }
     ]
   }
 };
