@@ -63,7 +63,7 @@ export function directoryExists(directoryPath: string): boolean {
   const fullPath = path.join(baseDir, directoryPath);
   try {
     return fs.existsSync(fullPath) && fs.statSync(fullPath).isDirectory();
-  } catch (error) {
+  } catch {
     return false;
   }
 }

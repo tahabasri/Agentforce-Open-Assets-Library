@@ -70,9 +70,14 @@ export function searchAssets(
   Object.entries(data.industries as CategoryData).forEach(([categoryName, industry]) => {
       ['actions', 'topics', 'agents'].forEach(assetType => {
   let assets: { [fileName: string]: ActionFile } | undefined;
-  if (assetType === 'actions') assets = (industry as { actions?: { [fileName: string]: ActionFile } }).actions;
-  else if (assetType === 'topics') assets = (industry as { topics?: { [fileName: string]: ActionFile } }).topics;
-  else if (assetType === 'agents') assets = (industry as { agents?: { [fileName: string]: ActionFile } }).agents;
+  const industryObj: {
+    actions?: { [fileName: string]: ActionFile };
+    topics?: { [fileName: string]: ActionFile };
+    agents?: { [fileName: string]: ActionFile };
+  } = industry;
+  if (assetType === 'actions') assets = industryObj.actions;
+  else if (assetType === 'topics') assets = industryObj.topics;
+  else if (assetType === 'agents') assets = industryObj.agents;
         if (assets) {
           Object.entries(assets).forEach(([fileName, item]) => {
             const title = fileName.replace('.json', '').replace(/_/g, ' ');
@@ -105,9 +110,14 @@ export function searchAssets(
   Object.entries(data.products as CategoryData).forEach(([categoryName, product]) => {
       ['actions', 'topics', 'agents'].forEach(assetType => {
   let assets: { [fileName: string]: ActionFile } | undefined;
-  if (assetType === 'actions') assets = (product as { actions?: { [fileName: string]: ActionFile } }).actions;
-  else if (assetType === 'topics') assets = (product as { topics?: { [fileName: string]: ActionFile } }).topics;
-  else if (assetType === 'agents') assets = (product as { agents?: { [fileName: string]: ActionFile } }).agents;
+  const productObj: {
+    actions?: { [fileName: string]: ActionFile };
+    topics?: { [fileName: string]: ActionFile };
+    agents?: { [fileName: string]: ActionFile };
+  } = product;
+  if (assetType === 'actions') assets = productObj.actions;
+  else if (assetType === 'topics') assets = productObj.topics;
+  else if (assetType === 'agents') assets = productObj.agents;
         if (assets) {
           Object.entries(assets).forEach(([fileName, item]) => {
             const title = fileName.replace('.json', '').replace(/_/g, ' ');
