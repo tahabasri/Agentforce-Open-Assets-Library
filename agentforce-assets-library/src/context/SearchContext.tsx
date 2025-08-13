@@ -70,9 +70,9 @@ export function searchAssets(
   Object.entries(data.industries as CategoryData).forEach(([categoryName, industry]) => {
       ['actions', 'topics', 'agents'].forEach(assetType => {
   let assets: { [fileName: string]: ActionFile } | undefined;
-  if (assetType === 'actions') assets = (industry as any).actions;
-  else if (assetType === 'topics') assets = (industry as any).topics;
-  else if (assetType === 'agents') assets = (industry as any).agents;
+  if (assetType === 'actions') assets = (industry as { actions?: { [fileName: string]: ActionFile } }).actions;
+  else if (assetType === 'topics') assets = (industry as { topics?: { [fileName: string]: ActionFile } }).topics;
+  else if (assetType === 'agents') assets = (industry as { agents?: { [fileName: string]: ActionFile } }).agents;
         if (assets) {
           Object.entries(assets).forEach(([fileName, item]) => {
             const title = fileName.replace('.json', '').replace(/_/g, ' ');
@@ -105,9 +105,9 @@ export function searchAssets(
   Object.entries(data.products as CategoryData).forEach(([categoryName, product]) => {
       ['actions', 'topics', 'agents'].forEach(assetType => {
   let assets: { [fileName: string]: ActionFile } | undefined;
-  if (assetType === 'actions') assets = (product as any).actions;
-  else if (assetType === 'topics') assets = (product as any).topics;
-  else if (assetType === 'agents') assets = (product as any).agents;
+  if (assetType === 'actions') assets = (product as { actions?: { [fileName: string]: ActionFile } }).actions;
+  else if (assetType === 'topics') assets = (product as { topics?: { [fileName: string]: ActionFile } }).topics;
+  else if (assetType === 'agents') assets = (product as { agents?: { [fileName: string]: ActionFile } }).agents;
         if (assets) {
           Object.entries(assets).forEach(([fileName, item]) => {
             const title = fileName.replace('.json', '').replace(/_/g, ' ');
