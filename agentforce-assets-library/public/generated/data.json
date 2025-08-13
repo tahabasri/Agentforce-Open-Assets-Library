@@ -1,0 +1,198 @@
+{
+  "industries": {
+    "Automotive": {
+      "actions": {
+        "getVehicleDetails.json": {
+          "sourceFile": "industries/Automotive/main/default/genAiFunctions/Custom_Get_Vehicle_Details",
+          "author": "Your Name",
+          "company": "Your Company",
+          "dependencies": [
+            "industries/Automotive/main/default/flows/Custom_Get_Vehicle_Details.flow-meta.xml"
+          ],
+          "category": "industries",
+          "categoryName": "Automotive",
+          "assetType": "actions",
+          "fileName": "getVehicleDetails"
+        }
+      },
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-ind-healthcare.svg"
+    },
+    "Communications": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-ind-communications.svg?w=1024"
+    },
+    "Consumer Goods": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-ind-consumer-goods.svg?w=1024"
+    },
+    "Education": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-ind-education.svg?w=1024"
+    },
+    "Energy & Utilities": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-ind-energy.svg?w=1024"
+    },
+    "Financial Services": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-ind-fin-services.svg?w=1024"
+    },
+    "Healthcare": {
+      "actions": {
+        "customAction.json": {
+          "sourceFile": "industries/healthcare/main/default/genAiFunctions/Custom_Get_Orders_by_Contact",
+          "author": "Your Name",
+          "company": "Your Company",
+          "dependencies": [
+            "industries/healthcare/main/default/flows/Custom_Get_Orders_by_Contact.flow-meta.xml"
+          ],
+          "category": "industries",
+          "categoryName": "Healthcare",
+          "assetType": "actions",
+          "fileName": "customAction"
+        }
+      },
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-ind-automotive.svg?w=1024"
+    },
+    "Life Sciences": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/10/icon-ind-life-science.svg?w=1024"
+    },
+    "Manufacturing": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-ind-manufacturing.svg?w=1024"
+    },
+    "Media": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-ind-media.svg?w=1024"
+    },
+    "Net Zero Cloud": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-net-zero.svg?w=1024"
+    },
+    "Nonprofit": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-ind-nonprofit.svg?w=1024"
+    },
+    "Public Sector": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-ind-public-sector.svg?w=1024"
+    },
+    "Retail": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-ind-retail.svg?w=1024"
+    },
+    "Technology": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-ind-tech.svg?w=1024"
+    }
+  },
+  "products": {
+    "Agentforce": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/09/icon-agentforce.svg?w=1024"
+    },
+    "B2B Commerce": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-commerce.svg?w=1024"
+    },
+    "B2C Commerce": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-commerce.svg?w=1024"
+    },
+    "CRM Analytics": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-tableau.svg?w=1024"
+    },
+    "D2C Commerce": {
+      "actions": {},
+      "topics": {},
+      "agents": {}
+    },
+    "Data Cloud": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-data-cloud.svg?w=1024"
+    },
+    "Marketing Cloud": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-marketing.svg?w=1024"
+    },
+    "Platform Cloud": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-platform.svg?w=1024"
+    },
+    "Revenue Cloud": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://appexchange.salesforce.com/partners/servlet/servlet.FileDownload?file=00P4V00000xVpTSUA0"
+    },
+    "Sales Cloud": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-sales.svg?w=1024"
+    },
+    "Salesforce Order Management": {
+      "actions": {},
+      "topics": {},
+      "agents": {}
+    },
+    "Service Cloud": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-service.svg?w=1024"
+    },
+    "Tableau": {
+      "actions": {},
+      "topics": {},
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-tableau.svg?w=1024"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "params": {
+      "category": "industries",
+      "categoryName": "Automotive",
+      "assetType": "actions",
+      "fileName": "getVehicleDetails"
+    }
+  },
+  {
+    "params": {
+      "category": "industries",
+      "categoryName": "Healthcare",
+      "assetType": "actions",
+      "fileName": "customAction"
+    }
+  }
+]

@@ -54,8 +54,8 @@ export default function Card({
   href,
   className = "glass"
 }: CardProps) {
-  return (
-    <a href={href} className={`block rounded-xl transition-all shadow-lg hover:scale-105 ${className}`}>
+  const cardContent = (
+    <>
       <div className="flex p-6 mb-4 transition-all border border-white/20 hover:border-blue-400 glass-interactive">
         {imageSrc && (
           <div className="mr-4 flex-shrink-0">
@@ -100,6 +100,16 @@ export default function Card({
       <div className="font-bold text-lg mb-2 text-white">{title}</div>
       <div className="text-white/80 mb-4">{description}</div>
       <span className="text-xs text-white/60">View details →</span>
+    </>
+  );
+
+  return href ? (
+    <a href={href} className={`block rounded-xl transition-all shadow-lg hover:scale-105 ${className}`}>
+      {cardContent}
     </a>
+  ) : (
+    <div className={`block rounded-xl transition-all shadow-lg hover:scale-105 ${className}`}>
+      {cardContent}
+    </div>
   );
 }

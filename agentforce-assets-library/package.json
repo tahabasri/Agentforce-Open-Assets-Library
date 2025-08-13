@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/generateStaticData.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate": "node scripts/generateStaticData.mjs"
   },
   "dependencies": {
     "liquid-glass-ui": "^1.0.0",

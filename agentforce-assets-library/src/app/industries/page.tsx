@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Section from '@/components/Section';
 import { AppData } from '@/types';
 import { useSearch } from '@/context/SearchContext';
+import { getStaticData } from '@/utils/staticData';
 
 export default function Industries() {
   const hashHandled = useRef(false);
@@ -17,22 +18,18 @@ export default function Industries() {
   const { searchTerm } = useSearch();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const loadData = async () => {
       try {
-        const response = await fetch('/api/data');
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-        const result = await response.json();
+        const result = await getStaticData();
         setData(result);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error occurred');
-        console.error('Error fetching data:', err);
+        console.error('Error loading data:', err);
       } finally {
         setLoading(false);
       }
     };
-    fetchData();
+    loadData();
   }, []);
 
   // Pre-select industry from hash

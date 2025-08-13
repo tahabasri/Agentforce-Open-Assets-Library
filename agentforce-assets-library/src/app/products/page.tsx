@@ -5,6 +5,7 @@ import Navigation from '@/components/Navigation';
 import Image from 'next/image';
 import Section from '@/components/Section';
 import { AppData } from '@/types';
+import { getStaticData } from '@/utils/staticData';
 
 import { useSelectedProduct } from '@/context/SelectedProductContext';
 import { useSearch } from '@/context/SearchContext';
@@ -18,22 +19,18 @@ export default function Products() {
   const { searchTerm } = useSearch();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const loadData = async () => {
       try {
-        const response = await fetch('/api/data');
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-        const result = await response.json();
+        const result = await getStaticData();
         setData(result);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error occurred');
-        console.error('Error fetching data:', err);
+        console.error('Error loading data:', err);
       } finally {
         setLoading(false);
       }
     };
-    fetchData();
+    loadData();
   }, []);
 
   // No hash logic needed, context handles selection

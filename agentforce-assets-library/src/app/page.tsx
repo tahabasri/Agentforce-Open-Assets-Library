@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import { AppData } from '@/types';
+import { getStaticData } from '@/utils/staticData';
 
 export default function Home() {
   const router = useRouter();
@@ -15,22 +16,18 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
-    const fetchData = async () => {
+    const loadData = async () => {
       try {
-        const response = await fetch('/api/data');
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-        const result = await response.json();
+        const result = await getStaticData();
         setData(result);
       } catch (err) {
-        console.error('Error fetching data:', err);
+        console.error('Error loading data:', err);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
+    loadData();
   }, []);
   
   // Count available industries and products
