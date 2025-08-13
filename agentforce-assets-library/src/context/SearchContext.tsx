@@ -2,6 +2,7 @@
 
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { AppData, ActionFile } from '@/types';
+import type { CategoryData } from '@/types';
 // ...existing code...
 
 interface SearchResult {
@@ -66,10 +67,12 @@ export function searchAssets(
 
   // Search industries
   if (data.industries) {
-  Object.entries(data.industries as Record<string, Record<string, unknown>>).forEach(([categoryName, industry]) => {
-      // Search actions, topics, and agents
+  Object.entries(data.industries as CategoryData).forEach(([categoryName, industry]) => {
       ['actions', 'topics', 'agents'].forEach(assetType => {
-        const assets = (industry as any)[assetType] as { [fileName: string]: ActionFile } | undefined;
+  let assets: { [fileName: string]: ActionFile } | undefined;
+  if (assetType === 'actions') assets = (industry as any).actions;
+  else if (assetType === 'topics') assets = (industry as any).topics;
+  else if (assetType === 'agents') assets = (industry as any).agents;
         if (assets) {
           Object.entries(assets).forEach(([fileName, item]) => {
             const title = fileName.replace('.json', '').replace(/_/g, ' ');
@@ -99,10 +102,12 @@ export function searchAssets(
 
   // Search products
   if (data.products) {
-  Object.entries(data.products as Record<string, Record<string, unknown>>).forEach(([categoryName, product]) => {
-      // Search actions, topics, and agents
+  Object.entries(data.products as CategoryData).forEach(([categoryName, product]) => {
       ['actions', 'topics', 'agents'].forEach(assetType => {
-        const assets = (product as any)[assetType] as { [fileName: string]: ActionFile } | undefined;
+  let assets: { [fileName: string]: ActionFile } | undefined;
+  if (assetType === 'actions') assets = (product as any).actions;
+  else if (assetType === 'topics') assets = (product as any).topics;
+  else if (assetType === 'agents') assets = (product as any).agents;
         if (assets) {
           Object.entries(assets).forEach(([fileName, item]) => {
             const title = fileName.replace('.json', '').replace(/_/g, ' ');

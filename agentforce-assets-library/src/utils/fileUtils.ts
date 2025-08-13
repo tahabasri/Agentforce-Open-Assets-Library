@@ -23,8 +23,7 @@ export function getSubdirectories(directoryPath: string): string[] {
     return fs.readdirSync(fullPath, { withFileTypes: true })
       .filter(dirent => dirent.isDirectory())
       .map(dirent => dirent.name);
-  } catch (error) {
-    console.error(`Error reading directory ${directoryPath}:`, error);
+  } catch {
     return [];
   }
 }
