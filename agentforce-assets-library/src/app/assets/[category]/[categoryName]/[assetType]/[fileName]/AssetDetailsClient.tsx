@@ -66,17 +66,16 @@ async function getAssetData(params: {
 }
 
 
-export default function AssetDetailsClient({ params }: { params: { status: string; value: string; } }) {
+export default function AssetDetailsClient({ params }: { params: Promise<{ category: string; categoryName: string; assetType: string; fileName: string }> }) {
   const [asset, setAsset] = useState<ActionFile | null>(null);
   const [loading, setLoading] = useState(true);
-  
-  const { fileName } = JSON.parse(params.value);
+  const [fileName, setFileName] = useState('');
   
   useEffect(() => {
     const loadAsset = async () => {
-
-      const { asset } = await getAssetData(JSON.parse(params.value));
-      
+      const resolvedParams = await params;
+      setFileName(resolvedParams.fileName);
+      const { asset } = await getAssetData(resolvedParams);
       setAsset(asset);
       setLoading(false);
     };
