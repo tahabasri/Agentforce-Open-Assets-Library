@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SelectedProductProvider } from "@/context/SelectedProductContext";
 import { SearchProvider } from "@/context/SearchContext";
 import "./globals.css";
 
@@ -28,9 +29,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white`}
       >
-        <SearchProvider>
-          {children}
-        </SearchProvider>
+    <SelectedProductProvider>
+      <SearchProvider>
+        {children}
+      </SearchProvider>
+    </SelectedProductProvider>
       </body>
     </html>
   );

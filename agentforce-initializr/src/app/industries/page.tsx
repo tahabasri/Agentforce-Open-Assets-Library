@@ -145,10 +145,11 @@ export default function Industries() {
             (() => {
               let hasAssets = false;
               Object.entries(filteredIndustries).forEach(([, categoryData]) => {
+                if (!categoryData) return;
                 if (
-                  ((!selectedType || selectedType === 'Actions') && Object.keys(categoryData.actions).length > 0) ||
-                  ((!selectedType || selectedType === 'Topics') && Object.keys(categoryData.topics).length > 0) ||
-                  ((!selectedType || selectedType === 'Agents') && Object.keys(categoryData.agents).length > 0)
+                  ((!selectedType || selectedType === 'Actions') && categoryData.actions && Object.keys(categoryData.actions).length > 0) ||
+                  ((!selectedType || selectedType === 'Topics') && categoryData.topics && Object.keys(categoryData.topics).length > 0) ||
+                  ((!selectedType || selectedType === 'Agents') && categoryData.agents && Object.keys(categoryData.agents).length > 0)
                 ) {
                   hasAssets = true;
                 }
@@ -163,9 +164,10 @@ export default function Industries() {
                 );
               }
               return Object.entries(filteredIndustries).map(([industry, categoryData]) => {
+                if (!categoryData) return null;
                 // Filter assets based on search term
                 const filteredActions = Object.fromEntries(
-                  Object.entries(categoryData.actions).filter(([name, asset]) => 
+                  Object.entries(categoryData.actions ?? {}).filter(([name, asset]) => 
                     searchTerm ? 
                       name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                       (asset.description && typeof asset.description === 'string' && 
@@ -175,7 +177,7 @@ export default function Industries() {
                 );
                 
                 const filteredTopics = Object.fromEntries(
-                  Object.entries(categoryData.topics).filter(([name, asset]) => 
+                  Object.entries(categoryData.topics ?? {}).filter(([name, asset]) => 
                     searchTerm ? 
                       name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                       (asset.description && typeof asset.description === 'string' && 
@@ -185,7 +187,7 @@ export default function Industries() {
                 );
                 
                 const filteredAgents = Object.fromEntries(
-                  Object.entries(categoryData.agents).filter(([name, asset]) => 
+                  Object.entries(categoryData.agents ?? {}).filter(([name, asset]) => 
                     searchTerm ? 
                       name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                       (asset.description && typeof asset.description === 'string' && 
@@ -219,22 +221,22 @@ export default function Industries() {
                     {(!selectedType || selectedType === 'Topics') && Object.keys(filteredTopics).length > 0 && (
                       <Section 
                         title={`${industry} Topics`} 
-                      sortedBy="Most Popular" 
-                      items={categoryData.topics}
-                      defaultImage="/images/topic-icon.svg"
-                    />
-                  )}
-                  {/* Agents Section */}
-                  {(!selectedType || selectedType === 'Agents') && Object.keys(categoryData.agents).length > 0 && (
-                    <Section 
-                      title={`${industry} Agents`} 
-                      sortedBy="Most Popular" 
-                      items={filteredAgents}
-                      defaultImage="/images/agent-icon.svg"
-                    />
-                  )}
-                </div>
-              );
+                        sortedBy="Most Popular" 
+                        items={filteredTopics}
+                        defaultImage="/images/topic-icon.svg"
+                      />
+                    )}
+                    {/* Agents Section */}
+                    {(!selectedType || selectedType === 'Agents') && Object.keys(filteredAgents).length > 0 && (
+                      <Section 
+                        title={`${industry} Agents`} 
+                        sortedBy="Most Popular" 
+                        items={filteredAgents}
+                        defaultImage="/images/agent-icon.svg"
+                      />
+                    )}
+                  </div>
+                );
               }).filter(Boolean);
             })()
           }

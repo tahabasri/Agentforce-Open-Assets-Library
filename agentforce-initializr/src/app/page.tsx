@@ -1,13 +1,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useSelectedProduct } from '@/context/SelectedProductContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import { AppData } from '@/types';
 
 export default function Home() {
+  const router = useRouter();
   const [data, setData] = useState<AppData | null>(null);
+  const { setSelectedProduct } = useSelectedProduct();
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
@@ -99,10 +103,13 @@ export default function Home() {
             ) : data && data.products ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {Object.entries(data.products).map(([product, categoryData]) => (
-                  <Link 
+                  <button
                     key={product}
-                    href={`/products#${product}`}
-                    className="bg-white border border-gray-300 hover:border-blue-400 hover:bg-blue-50 p-4 rounded-lg text-center transition-colors"
+                    className="bg-white border border-gray-300 hover:border-blue-400 hover:bg-blue-50 p-4 rounded-lg text-center transition-colors w-full"
+                    onClick={() => {
+                      setSelectedProduct(product);
+                      router.push('/products');
+                    }}
                   >
                     {categoryData.icon ? (
                       <Image src={categoryData.icon} alt={product + ' icon'} width={48} height={48} className="mx-auto mb-2 h-12 w-12 object-contain" />
@@ -110,7 +117,7 @@ export default function Home() {
                       <div className="text-3xl mb-2">📦</div>
                     )}
                     <div className="font-medium text-blue-800 capitalize">{product}</div>
-                  </Link>
+                  </button>
                 ))}
               </div>
             ) : (

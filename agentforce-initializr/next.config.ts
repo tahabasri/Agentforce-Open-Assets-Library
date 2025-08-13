@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    domains: [
+      "wp.sfdcdigital.com",
+      "appexchange.salesforce.com"
+    ]
+  }
 };
 
 export default nextConfig;

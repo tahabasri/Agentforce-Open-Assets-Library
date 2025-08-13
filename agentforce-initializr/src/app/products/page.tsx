@@ -5,14 +5,16 @@ import Navigation from '@/components/Navigation';
 import Image from 'next/image';
 import Section from '@/components/Section';
 import { AppData } from '@/types';
+
+import { useSelectedProduct } from '@/context/SelectedProductContext';
 import { useSearch } from '@/context/SearchContext';
 
 export default function Products() {
   const [data, setData] = useState<AppData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedProduct, setSelectedProduct] = useState<string | null>(null);
   const [selectedType, setSelectedType] = useState<string | null>(null);
+  const { selectedProduct, setSelectedProduct } = useSelectedProduct();
   const { searchTerm } = useSearch();
 
   useEffect(() => {
@@ -34,15 +36,7 @@ export default function Products() {
     fetchData();
   }, []);
 
-  // Pre-select product from hash
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const hash = window.location.hash.replace('#', '');
-      if (hash && (!selectedProduct || selectedProduct !== hash)) {
-        setSelectedProduct(hash);
-      }
-    }
-  }, [selectedProduct]);
+  // No hash logic needed, context handles selection
 
   if (loading) {
     return (
@@ -142,10 +136,11 @@ export default function Products() {
             (() => {
               let hasAssets = false;
               Object.entries(filteredProducts).forEach(([, categoryData]) => {
+                if (!categoryData) return;
                 if (
-                  ((!selectedType || selectedType === 'Actions') && Object.keys(categoryData.actions).length > 0) ||
-                  ((!selectedType || selectedType === 'Topics') && Object.keys(categoryData.topics).length > 0) ||
-                  ((!selectedType || selectedType === 'Agents') && Object.keys(categoryData.agents).length > 0)
+                  ((!selectedType || selectedType === 'Actions') && categoryData.actions && Object.keys(categoryData.actions).length > 0) ||
+                  ((!selectedType || selectedType === 'Topics') && categoryData.topics && Object.keys(categoryData.topics).length > 0) ||
+                  ((!selectedType || selectedType === 'Agents') && categoryData.agents && Object.keys(categoryData.agents).length > 0)
                 ) {
                   hasAssets = true;
                 }
@@ -160,9 +155,10 @@ export default function Products() {
                 );
               }
               return Object.entries(filteredProducts).map(([product, categoryData]) => {
+                if (!categoryData) return null;
                 // Filter assets based on search term
                 const filteredActions = Object.fromEntries(
-                  Object.entries(categoryData.actions).filter(([name, asset]) => 
+                  Object.entries(categoryData.actions ?? {}).filter(([name, asset]) => 
                     searchTerm ? 
                       name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                       (asset.description && typeof asset.description === 'string' && 
@@ -170,9 +166,8 @@ export default function Products() {
                     : true
                   )
                 );
-                
                 const filteredTopics = Object.fromEntries(
-                  Object.entries(categoryData.topics).filter(([name, asset]) => 
+                  Object.entries(categoryData.topics ?? {}).filter(([name, asset]) => 
                     searchTerm ? 
                       name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                       (asset.description && typeof asset.description === 'string' && 
@@ -180,9 +175,8 @@ export default function Products() {
                     : true
                   )
                 );
-                
                 const filteredAgents = Object.fromEntries(
-                  Object.entries(categoryData.agents).filter(([name, asset]) => 
+                  Object.entries(categoryData.agents ?? {}).filter(([name, asset]) => 
                     searchTerm ? 
                       name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                       (asset.description && typeof asset.description === 'string' && 
@@ -190,7 +184,6 @@ export default function Products() {
                     : true
                   )
                 );
-                
                 // Only render product if it has matching assets
                 if (
                   ((!selectedType || selectedType === 'Actions') && Object.keys(filteredActions).length === 0) &&
@@ -199,7 +192,6 @@ export default function Products() {
                 ) {
                   return null;
                 }
-                
                 return (
                   <div key={`product-${product}`} className="mb-10 mt-8 bg-white p-6 rounded-lg shadow">
                     <h2 id={product} className="text-2xl font-bold mb-6 text-blue-800 capitalize border-b-2 border-blue-300 pb-2">{product}</h2>
