@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -13,15 +12,14 @@ interface SectionProps {
   defaultImage?: string;
 }
 
-
 export default function Section({ title, sortedBy = 'Most Popular', items, defaultImage }: SectionProps) {
   return (
-    <div className="mb-10 bg-gray-50 p-6 rounded-lg">
-      <div className="flex justify-between items-center mb-6 border-b border-gray-300 pb-3">
-        <h2 className="text-2xl font-bold text-blue-800">{title}</h2>
+    <div className="mb-10 glass p-6 rounded-xl shadow-lg glass-interactive">
+      <div className="flex justify-between items-center mb-6 border-b border-white/20 pb-3">
+        <h2 className="text-2xl font-bold text-white animate-shimmer">{title}</h2>
         <div className="flex items-center">
-          <span className="text-sm text-gray-800 mr-2">Sorted by {sortedBy}</span>
-          <Link href={`/more/${title.toLowerCase().replace(/\s+/g, '-')}`} className="text-blue-700 hover:text-blue-900 hover:underline flex items-center font-medium">
+          <span className="text-sm text-white/80 mr-2">Sorted by {sortedBy}</span>
+          <Link href={`/more/${title.toLowerCase().replace(/\s+/g, '-')}`} className="text-white/90 hover:text-white hover:underline flex items-center font-medium">
             More in {title}
             <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -60,7 +58,7 @@ export default function Section({ title, sortedBy = 'Most Popular', items, defau
             );
           })
         ) : (
-          <p className="col-span-2 text-gray-500">No items found in this category.</p>
+          <p className="col-span-2 text-white/70">No items found in this category.</p>
         )}
       </div>
     </div>

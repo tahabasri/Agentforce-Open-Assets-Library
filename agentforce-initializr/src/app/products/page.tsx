@@ -42,7 +42,7 @@ export default function Products() {
     return (
       <div className="flex">
         <Navigation />
-        <div className="flex-1 flex justify-center items-center h-screen bg-white text-blue-800 font-bold text-lg">Loading...</div>
+        <div className="flex-1 flex justify-center items-center h-screen glass-intense text-white font-bold text-lg">Loading...</div>
       </div>
     );
   }
@@ -52,7 +52,7 @@ export default function Products() {
       <div className="flex">
         <Navigation />
         <div className="flex-1 flex justify-center items-center h-screen">
-          <div className="bg-red-50 text-red-700 border border-red-300 p-4 rounded-lg">Error: {error}</div>
+          <div className="glass text-white border border-white/20 p-4 rounded-xl">Error: {error}</div>
         </div>
       </div>
     );
@@ -63,7 +63,7 @@ export default function Products() {
       <div className="flex">
         <Navigation />
         <div className="flex-1 flex justify-center items-center h-screen">
-          <div className="bg-yellow-50 text-yellow-800 border border-yellow-300 p-4 rounded-lg">No data available</div>
+          <div className="glass text-white border border-white/20 p-4 rounded-xl">No data available</div>
         </div>
       </div>
     );
@@ -78,14 +78,14 @@ export default function Products() {
   const assetTypes = ['Actions', 'Topics', 'Agents'];
 
   return (
-    <div className="flex min-h-screen bg-white">
+    <div className="flex min-h-screen">
       <Navigation />
       <div className="flex-1 flex flex-col overflow-auto">
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-blue-800 to-blue-600 text-white py-12">
+        <div className="glass-intense text-white py-12 border-b border-white/20">
           <div className="max-w-5xl mx-auto px-6">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Products</h1>
-            <p className="text-xl md:text-2xl">Explore product-specific assets for Einstein Agents</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-shimmer">Products</h1>
+            <p className="text-xl md:text-2xl text-white/90">Explore product-specific assets for Einstein Agents</p>
           </div>
         </div>
         {/* Filter Section */}
@@ -93,20 +93,15 @@ export default function Products() {
           <div className="flex flex-wrap gap-4 mb-4">
             {/* Product Filter */}
             <div>
-              <div className="font-bold text-blue-800 mb-2">Products</div>
+              <div className="font-bold text-white mb-2">Products</div>
               <div className="flex flex-wrap gap-2">
                 {Object.keys(data.products)
                   .filter(product => searchTerm ? product.toLowerCase().includes(searchTerm.toLowerCase()) : true)
                   .map((product) => (
                     <button
                       key={product}
-                      className={`px-4 py-2 rounded border font-medium capitalize ${selectedProduct === product ? 'bg-blue-700 text-white border-blue-700' : 'bg-blue-50 text-blue-800 border-blue-200 hover:bg-blue-100'}`}
-                      onClick={() => {
-                        setSelectedProduct(selectedProduct === product ? null : product);
-                        if (typeof window !== 'undefined') {
-                          window.history.replaceState(null, '', window.location.pathname);
-                        }
-                      }}
+                      className={`glass-interactive glass px-4 py-2 rounded-lg font-medium text-white transition-all ${selectedProduct === product ? 'glass-intense' : ''}`}
+                      onClick={() => setSelectedProduct(product)}
                     >
                       {product}
                     </button>
@@ -115,12 +110,12 @@ export default function Products() {
             </div>
             {/* Asset Type Filter */}
             <div>
-              <div className="font-bold text-blue-800 mb-2">Asset Types</div>
+              <div className="font-bold text-white mb-2">Asset Types</div>
               <div className="flex flex-wrap gap-2">
                 {assetTypes.map((type) => (
                   <button
                     key={type}
-                    className={`px-4 py-2 rounded border font-medium capitalize ${selectedType === type ? 'bg-blue-700 text-white border-blue-700' : 'bg-blue-50 text-blue-800 border-blue-200 hover:bg-blue-100'}`}
+                    className={`glass-interactive glass px-4 py-2 rounded-lg font-medium text-white transition-all ${selectedType === type ? 'glass-intense' : ''}`}
                     onClick={() => setSelectedType(selectedType === type ? null : type)}
                   >
                     {type}
@@ -149,8 +144,8 @@ export default function Products() {
                 return (
                   <div className="flex flex-col items-center justify-center py-24">
                     <Image src="/images/globe.svg" alt="No results" width={96} height={96} style={{marginBottom: '1.5rem', opacity: 0.8}} />
-                    <h3 className="text-2xl font-bold text-blue-700 mb-2">No assets found</h3>
-                    <p className="text-gray-600 mb-4 text-center">Try changing your filters or check back later for new assets!</p>
+                    <h3 className="text-2xl font-bold text-white mb-2">No assets found</h3>
+                    <p className="text-white/80 mb-4 text-center">Try changing your filters or check back later for new assets!</p>
                   </div>
                 );
               }
@@ -193,8 +188,8 @@ export default function Products() {
                   return null;
                 }
                 return (
-                  <div key={`product-${product}`} className="mb-10 mt-8 bg-white p-6 rounded-lg shadow">
-                    <h2 id={product} className="text-2xl font-bold mb-6 text-blue-800 capitalize border-b-2 border-blue-300 pb-2">{product}</h2>
+                  <div key={`product-${product}`} className="mb-10 mt-8 glass p-6 rounded-xl shadow-lg glass-interactive">
+                    <h2 id={product} className="text-2xl font-bold mb-6 text-white capitalize border-b-2 border-white/20 pb-2 animate-shimmer">{product}</h2>
                     {/* Actions Section */}
                     {(!selectedType || selectedType === 'Actions') && Object.keys(filteredActions).length > 0 && (
                       <Section 

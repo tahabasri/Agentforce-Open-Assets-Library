@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSearch, searchAssets } from '@/context/SearchContext';
 import SearchResults from '@/components/SearchResults';
+import { GlassNavItem, GlassInput } from '@/components/glass';
 
 const categories = [
   { name: 'Home', icon: '🏠', path: '/' },
@@ -13,7 +13,7 @@ const categories = [
 ];
 
 export default function Navigation() {
-  const { searchTerm, setSearchTerm, setSearchResults, isSearchActive } = useSearch();
+  const { searchTerm, setSearchTerm, setSearchResults } = useSearch();
   const pathname = usePathname();
   const [data, setData] = useState(null);
   const [showSearchResults, setShowSearchResults] = useState(false);
@@ -40,7 +40,7 @@ export default function Navigation() {
   }, []);
   
   // Handle search input changes
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newSearchTerm = e.target.value;
     setSearchTerm(newSearchTerm);
     
@@ -55,44 +55,41 @@ export default function Navigation() {
   };
   
   return (
-    <div className="bg-blue-900 w-72 p-6 min-h-screen border-r border-blue-800">
+    <div className="glass-intense w-72 p-6 min-h-screen backdrop-blur-2xl border-r border-white/10">
       <div className="mb-8">
-        <h2 className="text-white text-2xl font-bold mb-6">Agentforce</h2>
+        <h2 className="text-white text-2xl font-bold mb-6 animate-shimmer">Agentforce</h2>
         <div className="space-y-3">
           {categories.map((category) => (
-            <Link 
-              key={category.name} 
+            <GlassNavItem 
+              key={category.name}
               href={category.path}
-              className={`flex items-center p-3 rounded-lg ${
-                pathname === category.path 
-                  ? 'bg-blue-800 text-white' 
-                  : 'text-blue-100 hover:bg-blue-800 hover:text-white'
-              }`}
+              isActive={pathname === category.path}
+              icon={<span>{category.icon}</span>}
             >
-              <div className="text-xl mr-3">{category.icon}</div>
-              <div className="font-medium">{category.name}</div>
-            </Link>
+              {category.name}
+            </GlassNavItem>
           ))}
         </div>
       </div>
       
       <div className="relative mb-6">
-        <input 
+        <GlassInput 
           type="text"
           placeholder={isFilterPage ? "Filter assets..." : "Search assets..."}
-          className="w-full p-2 pl-10 border border-blue-700 rounded-md bg-blue-800 text-white placeholder-blue-300"
           value={searchTerm}
           onChange={handleSearchChange}
+          icon={
+            <svg 
+              className="h-4 w-4" 
+              xmlns="http://www.w3.org/2000/svg" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          }
         />
-        <svg 
-          className="absolute left-3 top-3 h-4 w-4 text-blue-300" 
-          xmlns="http://www.w3.org/2000/svg" 
-          fill="none" 
-          viewBox="0 0 24 24" 
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
         
         {/* Show search results if not on industries or products page */}
         {showSearchResults && !isFilterPage && <SearchResults />}

@@ -27,13 +27,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 min-h-screen`}
       >
-    <SelectedProductProvider>
-      <SearchProvider>
-        {children}
-      </SearchProvider>
-    </SelectedProductProvider>
+        <div className="fixed inset-0 z-[-1] bg-noise opacity-[0.03] mix-blend-soft-light pointer-events-none"></div>
+        <SelectedProductProvider>
+          <SearchProvider>
+            {children}
+          </SearchProvider>
+        </SelectedProductProvider>
       </body>
     </html>
   );
