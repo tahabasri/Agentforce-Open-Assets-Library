@@ -7,12 +7,12 @@ import { AppData } from '@/types';
 import { toSentenceCase } from '@/utils/stringUtils';
 
 interface AssetDetailsParams {
-  params: {
+  params: Promise<{
     category: string;
     categoryName: string;
     assetType: string;
     fileName: string;
-  };
+  }>;
 }
 
 export default function AssetDetails({ params }: AssetDetailsParams) {
