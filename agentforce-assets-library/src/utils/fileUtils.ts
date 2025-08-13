@@ -90,24 +90,23 @@ export function getCategoryData(categoryType: 'industries' | 'products'): {
   for (const subCategory of subCategories) {
     let icon = undefined;
     try {
-      const configPath = `${categoryType}/${subCategory}/config.json`;
-      const fullConfigPath = require('path').join(process.cwd(), '..', configPath);
-      if (require('fs').existsSync(fullConfigPath)) {
-        const configRaw = require('fs').readFileSync(fullConfigPath, 'utf-8');
+      const configPath = path.join(baseDir, categoryType, subCategory, 'config.json');
+      if (fs.existsSync(configPath)) {
+        const configRaw = fs.readFileSync(configPath, 'utf-8');
         const config = JSON.parse(configRaw);
         icon = config.icon;
       }
-    } catch (e) {
+    } catch {
       icon = undefined;
     }
 
     // Helper to add navigation info to each asset
     function addNavInfo(obj: { [fileName: string]: ActionFile }, assetType: string) {
       for (const fileName of Object.keys(obj)) {
-        obj[fileName].category = categoryType;
-        obj[fileName].categoryName = subCategory;
-        obj[fileName].assetType = assetType;
-        obj[fileName].fileName = fileName.replace('.json', '');
+        (obj[fileName] as any).category = categoryType;
+        (obj[fileName] as any).categoryName = subCategory;
+        (obj[fileName] as any).assetType = assetType;
+        (obj[fileName] as any).fileName = fileName.replace('.json', '');
       }
       return obj;
     }

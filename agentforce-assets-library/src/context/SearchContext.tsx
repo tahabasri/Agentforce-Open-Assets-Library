@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useState, useContext, ReactNode } from 'react';
-import { ActionFile } from '@/types';
+// ...existing code...
 
 interface SearchResult {
   title: string;
@@ -55,7 +55,7 @@ export function useSearch() {
 
 // Helper function to search assets
 export function searchAssets(
-  data: any,
+  data: Record<string, unknown>,
   searchTerm: string
 ): SearchResult[] {
   if (!data || !searchTerm || searchTerm.trim() === '') return [];
@@ -65,18 +65,20 @@ export function searchAssets(
 
   // Search industries
   if (data.industries) {
-    Object.entries(data.industries).forEach(([categoryName, industry]: [string, any]) => {
+  Object.entries(data.industries as Record<string, Record<string, unknown>>).forEach(([categoryName, industry]) => {
       // Search actions, topics, and agents
       ['actions', 'topics', 'agents'].forEach(assetType => {
-        if (industry[assetType]) {
-          Object.entries(industry[assetType]).forEach(([fileName, item]: [string, any]) => {
+        const assets = (industry as Record<string, Record<string, unknown>>)[assetType] as Record<string, Record<string, unknown>> | undefined;
+        if (assets) {
+          Object.entries(assets).forEach(([fileName, item]) => {
             const title = fileName.replace('.json', '').replace(/_/g, ' ');
-            
+            const description = typeof (item as any).description === 'string' ? (item as any).description : '';
+            const sourceFile = typeof (item as any).sourceFile === 'string' ? (item as any).sourceFile : '';
             // Match by title, description, or source file
             if (
               title.toLowerCase().includes(term) || 
-              (item.description && String(item.description).toLowerCase().includes(term)) ||
-              (item.sourceFile && item.sourceFile.toLowerCase().includes(term))
+              (description && description.toLowerCase().includes(term)) ||
+              (sourceFile && sourceFile.toLowerCase().includes(term))
             ) {
               results.push({
                 title,
@@ -84,7 +86,7 @@ export function searchAssets(
                 categoryName,
                 assetType,
                 fileName: fileName.replace('.json', ''),
-                description: item.description || '',
+                description,
                 url: `/assets/industries/${encodeURIComponent(categoryName)}/${encodeURIComponent(assetType)}/${encodeURIComponent(fileName.replace('.json', ''))}`
               });
             }
@@ -96,18 +98,20 @@ export function searchAssets(
 
   // Search products
   if (data.products) {
-    Object.entries(data.products).forEach(([categoryName, product]: [string, any]) => {
+  Object.entries(data.products as Record<string, Record<string, unknown>>).forEach(([categoryName, product]) => {
       // Search actions, topics, and agents
       ['actions', 'topics', 'agents'].forEach(assetType => {
-        if (product[assetType]) {
-          Object.entries(product[assetType]).forEach(([fileName, item]: [string, any]) => {
+        const assets = (product as Record<string, Record<string, unknown>>)[assetType] as Record<string, Record<string, unknown>> | undefined;
+        if (assets) {
+          Object.entries(assets).forEach(([fileName, item]) => {
             const title = fileName.replace('.json', '').replace(/_/g, ' ');
-            
+            const description = typeof (item as any).description === 'string' ? (item as any).description : '';
+            const sourceFile = typeof (item as any).sourceFile === 'string' ? (item as any).sourceFile : '';
             // Match by title, description, or source file
             if (
               title.toLowerCase().includes(term) || 
-              (item.description && String(item.description).toLowerCase().includes(term)) ||
-              (item.sourceFile && item.sourceFile.toLowerCase().includes(term))
+              (description && description.toLowerCase().includes(term)) ||
+              (sourceFile && sourceFile.toLowerCase().includes(term))
             ) {
               results.push({
                 title,
@@ -115,7 +119,7 @@ export function searchAssets(
                 categoryName,
                 assetType,
                 fileName: fileName.replace('.json', ''),
-                description: item.description || '',
+                description,
                 url: `/assets/products/${encodeURIComponent(categoryName)}/${encodeURIComponent(assetType)}/${encodeURIComponent(fileName.replace('.json', ''))}`
               });
             }
