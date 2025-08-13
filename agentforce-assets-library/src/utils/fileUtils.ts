@@ -103,10 +103,21 @@ export function getCategoryData(categoryType: 'industries' | 'products'): {
     // Helper to add navigation info to each asset
     function addNavInfo(obj: { [fileName: string]: ActionFile }, assetType: string) {
       for (const fileName of Object.keys(obj)) {
-        (obj[fileName] as any).category = categoryType;
-        (obj[fileName] as any).categoryName = subCategory;
-        (obj[fileName] as any).assetType = assetType;
-        (obj[fileName] as any).fileName = fileName.replace('.json', '');
+          (obj[fileName] as ActionFile & {
+            category?: string;
+            categoryName?: string;
+            assetType?: string;
+            fileName?: string;
+          }).category = categoryType;
+          (obj[fileName] as ActionFile & {
+            categoryName?: string;
+          }).categoryName = subCategory;
+          (obj[fileName] as ActionFile & {
+            assetType?: string;
+          }).assetType = assetType;
+          (obj[fileName] as ActionFile & {
+            fileName?: string;
+          }).fileName = fileName.replace('.json', '');
       }
       return obj;
     }

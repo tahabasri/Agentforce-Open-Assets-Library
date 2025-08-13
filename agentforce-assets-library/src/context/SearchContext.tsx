@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useState, useContext, ReactNode } from 'react';
+import { AppData, ActionFile } from '@/types';
 // ...existing code...
 
 interface SearchResult {
@@ -55,7 +56,7 @@ export function useSearch() {
 
 // Helper function to search assets
 export function searchAssets(
-  data: Record<string, unknown>,
+  data: AppData,
   searchTerm: string
 ): SearchResult[] {
   if (!data || !searchTerm || searchTerm.trim() === '') return [];
@@ -68,12 +69,12 @@ export function searchAssets(
   Object.entries(data.industries as Record<string, Record<string, unknown>>).forEach(([categoryName, industry]) => {
       // Search actions, topics, and agents
       ['actions', 'topics', 'agents'].forEach(assetType => {
-        const assets = (industry as Record<string, Record<string, unknown>>)[assetType] as Record<string, Record<string, unknown>> | undefined;
+        const assets = (industry as any)[assetType] as { [fileName: string]: ActionFile } | undefined;
         if (assets) {
           Object.entries(assets).forEach(([fileName, item]) => {
             const title = fileName.replace('.json', '').replace(/_/g, ' ');
-            const description = typeof (item as any).description === 'string' ? (item as any).description : '';
-            const sourceFile = typeof (item as any).sourceFile === 'string' ? (item as any).sourceFile : '';
+            const description = typeof item.description === 'string' ? item.description : '';
+            const sourceFile = typeof item.sourceFile === 'string' ? item.sourceFile : '';
             // Match by title, description, or source file
             if (
               title.toLowerCase().includes(term) || 
@@ -101,12 +102,12 @@ export function searchAssets(
   Object.entries(data.products as Record<string, Record<string, unknown>>).forEach(([categoryName, product]) => {
       // Search actions, topics, and agents
       ['actions', 'topics', 'agents'].forEach(assetType => {
-        const assets = (product as Record<string, Record<string, unknown>>)[assetType] as Record<string, Record<string, unknown>> | undefined;
+        const assets = (product as any)[assetType] as { [fileName: string]: ActionFile } | undefined;
         if (assets) {
           Object.entries(assets).forEach(([fileName, item]) => {
             const title = fileName.replace('.json', '').replace(/_/g, ' ');
-            const description = typeof (item as any).description === 'string' ? (item as any).description : '';
-            const sourceFile = typeof (item as any).sourceFile === 'string' ? (item as any).sourceFile : '';
+            const description = typeof item.description === 'string' ? item.description : '';
+            const sourceFile = typeof item.sourceFile === 'string' ? item.sourceFile : '';
             // Match by title, description, or source file
             if (
               title.toLowerCase().includes(term) || 
