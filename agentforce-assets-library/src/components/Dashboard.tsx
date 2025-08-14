@@ -42,8 +42,8 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8 text-blue-800 bg-blue-50 p-4 rounded-lg border border-blue-200 inline-block">Explore by Products</h1>
+    <div className="p-4 sm:p-6 max-w-6xl mx-auto">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-8 text-blue-800 bg-blue-50 p-3 sm:p-4 rounded-lg border border-blue-200 inline-block">Explore by Products</h1>
 
       {/* Industries Sections */}
       {Object.entries(data.industries).map(([industry, categoryData]) => (

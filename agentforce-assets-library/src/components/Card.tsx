@@ -56,10 +56,10 @@ export default function Card({
 }: CardProps) {
   const cardContent = (
     <>
-      <div className="flex p-6 mb-4 transition-all border border-white/20 hover:border-blue-400 glass-interactive">
+      <div className="flex flex-col sm:flex-row p-4 sm:p-6 mb-4 transition-all border border-white/20 hover:border-blue-400 glass-interactive">
         {imageSrc && (
-          <div className="mr-4 flex-shrink-0">
-            <div className="w-16 h-16 bg-blue-600/30 glass-light rounded-lg overflow-hidden flex items-center justify-center animate-float">
+          <div className="mb-3 sm:mb-0 sm:mr-4 flex-shrink-0 flex sm:block justify-center">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-blue-600/30 glass-light rounded-lg overflow-hidden flex items-center justify-center animate-float">
               <Image
                 src={imageSrc}
                 alt={title}
@@ -71,15 +71,15 @@ export default function Card({
           </div>
         )}
         <div className="flex-1">
-          <h3 className="text-xl font-semibold text-white truncate">{title}</h3>
+          <h3 className="text-lg sm:text-xl font-semibold text-white truncate">{title}</h3>
           {author && (
-            <p className="text-sm text-white/80"><span className="font-semibold">Author:</span> {author}</p>
+            <p className="text-xs sm:text-sm text-white/80"><span className="font-semibold">Author:</span> {author}</p>
           )}
           {company && (
-            <p className="text-sm text-white/80"><span className="font-semibold">Company:</span> {company}</p>
+            <p className="text-xs sm:text-sm text-white/80"><span className="font-semibold">Company:</span> {company}</p>
           )}
           {dependencies && (
-            <p className="text-sm text-white/80">
+            <p className="text-xs sm:text-sm text-white/80">
               <span className="font-semibold">Integration Difficulty:</span> {
                 (() => {
                   const count = dependencies.length;
@@ -92,7 +92,7 @@ export default function Card({
             </p>
           )}
           {rating && <StarRating rating={rating.rating} count={rating.count} />}
-          <p className="mt-2 text-sm text-white/90 line-clamp-3">
+          <p className="mt-2 text-xs sm:text-sm text-white/90 line-clamp-2 sm:line-clamp-3">
             {description}
           </p>
         </div>

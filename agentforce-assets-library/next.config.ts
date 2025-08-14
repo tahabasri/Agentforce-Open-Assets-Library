@@ -16,6 +16,7 @@ const nextConfig: NextConfig = {
       }
     ]
   }
+  // Removed headers as they don't work with output: export
 };
 
 export default nextConfig;

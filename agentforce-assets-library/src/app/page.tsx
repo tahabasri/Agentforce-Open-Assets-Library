@@ -35,18 +35,18 @@ export default function Home() {
   const productCount = data ? Object.keys(data.products).length : 0;
 
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row">
       <Navigation />
-      <div className="flex-1 overflow-auto">
+      <div className="flex-1 overflow-auto md:ml-72">
         {/* Hero Section */}
-        <div className="glass-intense text-white py-16 border-b border-white/20">
-          <div className="max-w-5xl mx-auto px-6">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-shimmer">Agentforce Open Assets Library</h1>
-            <p className="text-xl md:text-2xl mb-8 text-white/90">Explore industry-specific and product-specific assets for Agentforce Agents.</p>
-                <div className="flex flex-wrap gap-4">
+        <div className="glass-intense text-white py-8 md:py-16 border-b border-white/20 mt-16 md:mt-0">
+          <div className="max-w-5xl mx-auto px-4 md:px-6">
+            <h1 className="text-3xl md:text-5xl font-bold mb-4 animate-shimmer">Agentforce Open Assets Library</h1>
+            <p className="text-lg md:text-2xl mb-6 md:mb-8 text-white/90">Explore industry-specific and product-specific assets for Agentforce Agents.</p>
+                <div className="flex flex-wrap gap-3 md:gap-4">
                   <Link 
                     href="/products"
-                    className="glass-interactive bg-white/20 backdrop-blur-lg text-white font-medium py-3 px-6 rounded-lg border border-white/30 hover:bg-white/30"
+                    className="glass-interactive bg-white/20 backdrop-blur-lg text-white font-medium py-2 md:py-3 px-4 md:px-6 rounded-lg border border-white/30 hover:bg-white/30 text-sm md:text-base"
                   >
                     View Products
                   </Link>
@@ -61,12 +61,12 @@ export default function Home() {
             </div>
         
         {/* Stats Section */}
-        <div className="py-12">
-          <div className="max-w-5xl mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="glass p-6 rounded-xl animate-float">
-                <h3 className="text-2xl font-bold text-white">{industryCount}</h3>
-                <p className="text-white/80">Industries Available</p>
+        <div className="py-6 md:py-12">
+          <div className="max-w-5xl mx-auto px-4 md:px-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+              <div className="glass p-4 md:p-6 rounded-xl animate-float">
+                <h3 className="text-xl md:text-2xl font-bold text-white">{industryCount}</h3>
+                <p className="text-sm md:text-base text-white/80">Industries Available</p>
               </div>
               <div className="glass p-6 rounded-xl animate-float" style={{ animationDelay: '0.5s' }}>
                 <h3 className="text-2xl font-bold text-white">{productCount}</h3>

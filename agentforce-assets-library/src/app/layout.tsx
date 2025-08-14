@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Agentforce Open Assets Library",
   description: "A library of Salesforce Einstein assets for Agentforce",
+  viewport: "width=device-width, initial-scale=1.0",
 };
 
 export default function RootLayout({
