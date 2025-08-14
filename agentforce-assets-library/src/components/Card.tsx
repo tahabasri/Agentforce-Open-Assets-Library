@@ -55,52 +55,51 @@ export default function Card({
   className = "glass"
 }: CardProps) {
   const cardContent = (
-    <>
-      <div className="flex flex-col sm:flex-row p-4 sm:p-6 mb-4 transition-all border border-white/20 hover:border-blue-400 glass-interactive">
-        {imageSrc && (
-          <div className="mb-3 sm:mb-0 sm:mr-4 flex-shrink-0 flex sm:block justify-center">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-blue-600/30 glass-light rounded-lg overflow-hidden flex items-center justify-center animate-float">
-              <Image
-                src={imageSrc}
-                alt={title}
-                width={48}
-                height={48}
-                className="object-contain"
-              />
-            </div>
+    <div className="flex flex-col sm:flex-row p-4 sm:p-6 mb-4 transition-all">
+      {imageSrc && (
+        <div className="mb-3 sm:mb-0 sm:mr-4 flex-shrink-0 flex sm:block justify-center">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-blue-600/30 glass-light rounded-lg overflow-hidden flex items-center justify-center animate-float">
+            <Image
+              src={imageSrc}
+              alt={title}
+              width={48}
+              height={48}
+              className="object-contain"
+            />
           </div>
-        )}
-        <div className="flex-1">
-          <h3 className="text-lg sm:text-xl font-semibold text-white truncate">{title}</h3>
-          {author && (
-            <p className="text-xs sm:text-sm text-white/80"><span className="font-semibold">Author:</span> {author}</p>
-          )}
-          {company && (
-            <p className="text-xs sm:text-sm text-white/80"><span className="font-semibold">Company:</span> {company}</p>
-          )}
-          {dependencies && (
-            <p className="text-xs sm:text-sm text-white/80">
-              <span className="font-semibold">Integration Difficulty:</span> {
-                (() => {
-                  const count = dependencies.length;
-                  const depWord = count === 1 ? 'dependency' : 'dependencies';
-                  if (count < 5) return `Easy (${count} ${depWord})`;
-                  if (count <= 15) return `Moderate (${count} ${depWord})`;
-                  return `Complex (${count} ${depWord})`;
-                })()
-              }
-            </p>
-          )}
-          {rating && <StarRating rating={rating.rating} count={rating.count} />}
-          <p className="mt-2 text-xs sm:text-sm text-white/90 line-clamp-2 sm:line-clamp-3">
-            {description}
-          </p>
         </div>
+      )}
+      <div className="flex-1">
+        <h3 className="text-lg sm:text-xl font-semibold text-white truncate">{title}</h3>
+        {author && (
+          <p className="text-xs sm:text-sm text-white/80"><span className="font-semibold">Author:</span> {author}</p>
+        )}
+        {company && (
+          <p className="text-xs sm:text-sm text-white/80"><span className="font-semibold">Company:</span> {company}</p>
+        )}
+        {dependencies && (
+          <p className="text-xs sm:text-sm text-white/80 mb-2">
+            <span className="font-semibold">Integration Difficulty:</span> {
+              (() => {
+                const count = dependencies.length;
+                const depWord = count === 1 ? 'dependency' : 'dependencies';
+                if (count < 5) return `Easy (${count} ${depWord})`;
+                if (count <= 15) return `Moderate (${count} ${depWord})`;
+                return `Complex (${count} ${depWord})`;
+              })()
+            }
+          </p>
+        )}
+        {/* View details button below Integration Difficulty */}
+        {href && (
+          <a href={href} className="inline-block mt-2 text-xs text-white/60 hover:underline">View details →</a>
+        )}
+        {rating && <StarRating rating={rating.rating} count={rating.count} />}
+        <p className="mt-2 text-xs sm:text-sm text-white/90 line-clamp-2 sm:line-clamp-3">
+          {description}
+        </p>
       </div>
-      <div className="font-bold text-lg mb-2 text-white">{title}</div>
-      <div className="text-white/80 mb-4">{description}</div>
-      <span className="text-xs text-white/60">View details →</span>
-    </>
+    </div>
   );
 
   return href ? (

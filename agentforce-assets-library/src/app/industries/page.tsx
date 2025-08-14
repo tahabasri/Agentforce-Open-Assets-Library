@@ -91,7 +91,7 @@ export default function Industries() {
         <div className="glass-intense text-white py-12 border-b border-white/20">
           <div className="max-w-5xl mx-auto px-6">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-shimmer">Industries</h1>
-            <p className="text-xl md:text-2xl text-white/90">Explore industry-specific assets for Einstein Agents</p>
+            <p className="text-xl md:text-2xl text-white/90">Explore industry-specific assets for Agentforce Agents</p>
           </div>
         </div>
         {/* Filter Section */}

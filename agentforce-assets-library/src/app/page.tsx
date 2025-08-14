@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <div className="flex flex-col md:flex-row">
       <Navigation />
-      <div className="flex-1 overflow-auto md:ml-72">
+      <div className="flex-1 overflow-auto">
         {/* Hero Section */}
         <div className="glass-intense text-white py-8 md:py-16 border-b border-white/20 mt-16 md:mt-0">
           <div className="max-w-5xl mx-auto px-4 md:px-6">

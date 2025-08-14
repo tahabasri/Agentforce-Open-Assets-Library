@@ -100,7 +100,7 @@ export default function Navigation() {
       {/* Navigation Sidebar */}
       <div 
         ref={menuRef}
-        className={`glass-intense fixed md:relative z-20 top-0 left-0 w-72 p-6 h-full backdrop-blur-2xl border-r border-white/10 transform transition-transform duration-300 ease-in-out ${
+  className={`glass-intense fixed md:relative z-20 top-0 left-0 w-72 p-6 min-h-screen backdrop-blur-2xl border-r border-white/10 transform transition-transform duration-300 ease-in-out ${
           mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >

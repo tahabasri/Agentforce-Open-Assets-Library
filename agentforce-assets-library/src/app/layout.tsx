@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Agentforce Open Assets Library",
-  description: "A library of Salesforce Einstein assets for Agentforce",
+  description: "A library of Salesforce assets for Agentforce",
   viewport: "width=device-width, initial-scale=1.0",
 };
 
