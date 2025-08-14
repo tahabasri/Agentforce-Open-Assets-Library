@@ -212,9 +212,7 @@ export default function Home() {
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2 text-white">Agents</h3>
                   <p className="text-white/80 mb-4">Pre-built Agentforce Agents for specific use cases across different industries.</p>
-                  <Link href="/industries" className="text-white/90 hover:text-white font-medium">
-                    View Agents →
-                  </Link>
+                  Coming Soon
                 </div>
               </div>
             </div>
@@ -246,28 +244,37 @@ export default function Home() {
             
             <div className="space-y-6">
               <div className="glass p-6 rounded-xl glass-interactive animate-float">
-                <h3 className="text-xl font-bold mb-2 text-white">What is an AI Agent?</h3>
-                <p className="text-white/80">
-                  An AI agent is more than just intelligent software. It&apos;s designed to learn and adapt to user interactions 
-                  autonomously. This flexibility and continuous learning capability enable it to drive efficiencies while 
-                  providing increasingly better support and solutions.
-                </p>
+              <h3 className="text-xl font-bold mb-2 text-white">What is an AI Agent?</h3>
+              <p className="text-white/80">
+                An AI agent is more than just intelligent software. It&apos;s designed to learn and adapt to user interactions 
+                autonomously. This flexibility and continuous learning capability enable it to drive efficiencies while 
+                providing increasingly better support and solutions.
+              </p>
               </div>
               
               <div className="glass p-6 rounded-xl glass-interactive animate-float" style={{ animationDelay: '0.2s' }}>
-                <h3 className="text-xl font-bold mb-2 text-white">What are the benefits of Agentforce?</h3>
-                <p className="text-white/80">
-                  Agentforce provides a comprehensive platform for building and deploying AI agents that can handle 
-                  complex customer interactions, automate routine tasks, and provide personalized support at scale.
-                </p>
+              <h3 className="text-xl font-bold mb-2 text-white">What are the benefits of Agentforce?</h3>
+              <p className="text-white/80">
+                Agentforce provides a comprehensive platform for building and deploying AI agents that can handle 
+                complex customer interactions, automate routine tasks, and provide personalized support at scale.
+              </p>
               </div>
               
               <div className="glass p-6 rounded-xl glass-interactive animate-float" style={{ animationDelay: '0.4s' }}>
-                <h3 className="text-xl font-bold mb-2 text-white">How can I contribute to this library?</h3>
-                <p className="text-white/80">
-                  You can contribute to this open assets library by creating and sharing your own actions, topics, and agents. 
-                  Follow the documentation to understand the format and submission process.
-                </p>
+              <h3 className="text-xl font-bold mb-2 text-white">How can I contribute to this library?</h3>
+              <p className="text-white/80">
+                You can contribute to this open assets library by creating and sharing your own actions, topics, and agents. 
+                Follow the documentation to understand the format and submission process.
+              </p>
+              </div>
+
+              <div className="glass p-6 rounded-xl glass-interactive animate-float" style={{ animationDelay: '0.6s' }}>
+              <h3 className="text-xl font-bold mb-2 text-white">
+                Why not just choose AgentExchange platform? <a href="https://agentexchange.salesforce.com/" target="_blank" rel="noopener noreferrer" className="underline text-blue-300">(AgentExchange)</a>
+              </h3>
+              <p className="text-white/80">
+                Agentforce Open Assets Library is not an alternative to AgentExchange, but a complementary open source library designed to extend the capabilities provided by agents. While AgentExchange offers a curated library of fully ready-to-use agents, this library provides a collection of composable topics and actions that can be used interchangeably with agents in AgentExchange. Additionally, the time required to contribute a new action or topic to this library is significantly lower, encouraging more rapid and diverse contributions from the community.
+              </p>
               </div>
             </div>
           </div>

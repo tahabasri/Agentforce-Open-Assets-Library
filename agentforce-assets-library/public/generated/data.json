@@ -124,28 +124,17 @@
       "agents": {},
       "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/09/icon-agentforce.svg?w=1024"
     },
-    "B2B Commerce": {
-      "actions": {},
-      "topics": {},
-      "agents": {},
-      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-commerce.svg?w=1024"
-    },
-    "B2C Commerce": {
-      "actions": {},
-      "topics": {},
-      "agents": {},
-      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-commerce.svg?w=1024"
-    },
     "CRM Analytics": {
       "actions": {},
       "topics": {},
       "agents": {},
       "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-tableau.svg?w=1024"
     },
-    "D2C Commerce": {
+    "Commerce": {
       "actions": {},
       "topics": {},
-      "agents": {}
+      "agents": {},
+      "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-commerce.svg?w=1024"
     },
     "Data Cloud": {
       "actions": {},
@@ -176,11 +165,6 @@
       "topics": {},
       "agents": {},
       "icon": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/icon-sales.svg?w=1024"
-    },
-    "Salesforce Order Management": {
-      "actions": {},
-      "topics": {},
-      "agents": {}
     },
     "Service Cloud": {
       "actions": {},
