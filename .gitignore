@@ -48,3 +48,6 @@ $RECYCLE.BIN/
 **/venv/
 
 .sfdx-hardis**
+
+# Ignore locally generated files
+agentforce-assets-library/public/generated/**
