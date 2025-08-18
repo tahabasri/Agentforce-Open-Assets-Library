@@ -7,6 +7,8 @@ import { ActionFile } from '@/types';
 import { toSentenceCase } from '@/utils/stringUtils';
 import { getStaticData } from '@/utils/staticData';
 import { downloadAssetFiles } from '@/utils/zipUtils';
+import { generateDeployCommand } from '@/utils/commandUtils';
+import CopyCommand from '@/components/CopyCommand';
 
 // Get asset data function
 async function getAssetData(params: {
@@ -71,6 +73,7 @@ export default function AssetDetailsClient({ params }: { params: Promise<{ categ
   const [asset, setAsset] = useState<ActionFile | null>(null);
   const [loading, setLoading] = useState(true);
   const [fileName, setFileName] = useState('');
+  const [assetType, setAssetType] = useState('');
   const [downloading, setDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState<string | null>(null);
   
@@ -78,6 +81,7 @@ export default function AssetDetailsClient({ params }: { params: Promise<{ categ
     const loadAsset = async () => {
       const resolvedParams = await params;
       setFileName(resolvedParams.fileName);
+      setAssetType(resolvedParams.assetType);
       const { asset } = await getAssetData(resolvedParams);
       setAsset(asset);
       setLoading(false);
@@ -136,26 +140,23 @@ export default function AssetDetailsClient({ params }: { params: Promise<{ categ
                   {asset.company && <p className="text-white/70 text-sm">Company: {asset.company}</p>}
                   
                   <div className="mt-3 border-t border-white/10 pt-3">
-                    <h3 className="text-white text-sm font-semibold mb-1">Files Included:</h3>
                     <div className="text-white/70 text-xs mb-3">
-                      <div className="flex items-start gap-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-0.5 text-blue-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        <span className="break-all">{asset.sourceFile}</span>
-                      </div>
-                      
                       {asset.dependencies && asset.dependencies.length > 0 && (
                         <div className="mt-1">
                           <div className="font-semibold text-xs text-white/90 mt-1">Dependencies:</div>
-                          {asset.dependencies.map((dep, index) => (
-                            <div key={index} className="flex items-start gap-1 mt-0.5">
-                              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-0.5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
-                              </svg>
-                              <span className="break-all">{dep}</span>
-                            </div>
-                          ))}
+                          {asset.dependencies.map((dep, index) => {
+                            const parts = dep.split('/').filter(Boolean);
+                            const file = parts.pop();
+                            const parent = parts.length > 0 ? parts[parts.length - 1] : '';
+                            return (
+                              <div key={index} className="flex items-start gap-1 mt-0.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-0.5 text-blue-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                <span className="break-all">{parent ? `${parent}/` : ''}{file}</span>
+                              </div>
+                            );
+                          })}
                         </div>
                       )}
                     </div>
@@ -197,6 +198,11 @@ export default function AssetDetailsClient({ params }: { params: Promise<{ categ
                   </button>
                   {downloadError && <p className="mt-2 text-red-500 text-sm">{downloadError}</p>}
                 </div>
+              </div>
+
+              {/* Command Section */}
+              <div className="mt-6 pt-6 border-t border-white/10">
+                <CopyCommand command={generateDeployCommand(asset, fileName, assetType)} />
               </div>
             </div>
           </div>
