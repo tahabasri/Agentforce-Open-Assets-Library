@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { ActionFile } from '@/types';
 import { toSentenceCase } from '@/utils/stringUtils';
 import { getStaticData } from '@/utils/staticData';
+import { downloadAssetFiles } from '@/utils/zipUtils';
 
 // Get asset data function
 async function getAssetData(params: {
@@ -70,6 +71,8 @@ export default function AssetDetailsClient({ params }: { params: Promise<{ categ
   const [asset, setAsset] = useState<ActionFile | null>(null);
   const [loading, setLoading] = useState(true);
   const [fileName, setFileName] = useState('');
+  const [downloading, setDownloading] = useState(false);
+  const [downloadError, setDownloadError] = useState<string | null>(null);
   
   useEffect(() => {
     const loadAsset = async () => {
@@ -131,6 +134,68 @@ export default function AssetDetailsClient({ params }: { params: Promise<{ categ
                   <p className="text-white/90 mb-4">{asset.description || 'No description available.'}</p>
                   {asset.author && <p className="text-white/70 text-sm">Author: {asset.author}</p>}
                   {asset.company && <p className="text-white/70 text-sm">Company: {asset.company}</p>}
+                  
+                  <div className="mt-3 border-t border-white/10 pt-3">
+                    <h3 className="text-white text-sm font-semibold mb-1">Files Included:</h3>
+                    <div className="text-white/70 text-xs mb-3">
+                      <div className="flex items-start gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-0.5 text-blue-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span className="break-all">{asset.sourceFile}</span>
+                      </div>
+                      
+                      {asset.dependencies && asset.dependencies.length > 0 && (
+                        <div className="mt-1">
+                          <div className="font-semibold text-xs text-white/90 mt-1">Dependencies:</div>
+                          {asset.dependencies.map((dep, index) => (
+                            <div key={index} className="flex items-start gap-1 mt-0.5">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-0.5 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+                              </svg>
+                              <span className="break-all">{dep}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  
+                  {/* Download Button */}
+                  <button 
+                    onClick={async () => {
+                      setDownloadError(null);
+                      setDownloading(true);
+                      try {
+                        await downloadAssetFiles(asset, fileName);
+                      } catch (error) {
+                        console.error('Error downloading files:', error);
+                        setDownloadError('Failed to download files. Please try again.');
+                      } finally {
+                        setDownloading(false);
+                      }
+                    }}
+                    disabled={downloading}
+                    className={`mt-4 px-4 py-2 ${downloading ? 'bg-gray-500' : 'bg-blue-600 hover:bg-blue-700'} rounded-md text-white flex items-center gap-2 transition-colors`}
+                  >
+                    {downloading ? (
+                      <>
+                        <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Preparing Files...
+                      </>
+                    ) : (
+                      <>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download Files
+                      </>
+                    )}
+                  </button>
+                  {downloadError && <p className="mt-2 text-red-500 text-sm">{downloadError}</p>}
                 </div>
               </div>
             </div>

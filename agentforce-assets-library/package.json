@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-  "dev": "node scripts/generateStaticData.mjs && next dev",
-    "prebuild": "node scripts/generateStaticData.mjs",
+    "dev": "node scripts/generateStaticData.mjs && next dev",
+    "prebuild": "node scripts/generateStaticData.mjs && node scripts/generateAssetBundles.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate": "node scripts/generateStaticData.mjs"
+    "generate": "node scripts/generateStaticData.mjs",
+    "generate-assets": "node scripts/generateAssetBundles.mjs"
   },
   "dependencies": {
+    "file-saver": "^2.0.5",
+    "jszip": "^3.10.1",
     "liquid-glass-ui": "^1.0.0",
     "next": "15.4.6",
     "react": "19.1.0",
@@ -19,6 +22,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/file-saver": "^2.0.7",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
