@@ -7,9 +7,9 @@ export function generateDeployCommand(asset: ActionFile, fileName: string, asset
 
   // Add the main asset command based on type
   if (assetType === 'actions') {
-    command += ` -m 'GenAiFunction: ${fileName}'`;
+    command += `\n -m 'GenAiFunction: ${fileName}'`;
   } else if (assetType === 'topics') {
-    command += ` -m 'GenAiPlugin: ${fileName}'`;
+    command += `\n -m 'GenAiPlugin: ${fileName}'`;
   }
 
   // Add dependencies if they exist
@@ -23,7 +23,7 @@ export function generateDeployCommand(asset: ActionFile, fileName: string, asset
       if (nameMatch) {
         let dependencyName = nameMatch[1];
         dependencyName = dependencyName.replace(/\.flow-meta$/, '');
-        command += ` -m '${type}: ${dependencyName}'`;
+        command += `\n -m '${type}: ${dependencyName}'`;
       }
     }
     });
