@@ -5,6 +5,8 @@ on:
       - main
 jobs:
   contributors:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: wow-actions/contributors-list@v1
