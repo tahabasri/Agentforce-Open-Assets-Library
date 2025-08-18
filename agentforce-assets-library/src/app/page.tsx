@@ -9,6 +9,8 @@ import Navigation from '@/components/Navigation';
 import { AppData } from '@/types';
 import { getStaticData } from '@/utils/staticData';
 
+import { GITHUB_PUBLIC_URL } from '@/constants/global';
+
 export default function Home() {
   const router = useRouter();
   const [data, setData] = useState<AppData | null>(null);
@@ -163,11 +165,11 @@ export default function Home() {
             </p>
             <div className="flex justify-center">
               <Image
-              src="https://raw.githubusercontent.com/tahabasri/Agentforce-Open-Assets-Library/refs/heads/main/CONTRIBUTORS.svg"
-              alt="Contributors"
-              width={800}
-              height={200}
-              className="rounded-lg shadow-lg border border-white/20 bg-white/5"
+                src={GITHUB_PUBLIC_URL + 'CONTRIBUTORS.svg'}
+                alt="Contributors"
+                width={800}
+                height={200}
+                className="rounded-lg shadow-lg border border-white/20 bg-white/5"
               />
             </div>
           </div>

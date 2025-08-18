@@ -10,6 +10,8 @@ import { downloadAssetFiles } from '@/utils/zipUtils';
 import { generateDeployCommand } from '@/utils/commandUtils';
 import CopyCommand from '@/components/CopyCommand';
 
+import { GITHUB_PUBLIC_URL } from '@/constants/global';
+
 // Get asset data function
 async function getAssetData(params: {
   category: string;
@@ -145,6 +147,7 @@ export default function AssetDetailsClient({ params }: { params: Promise<{ categ
                         <div className="mt-1">
                           <div className="font-semibold text-xs text-white/90 mt-1">Dependencies:</div>
                           {asset.dependencies.map((dep, index) => {
+                            const url = `${GITHUB_PUBLIC_URL}${dep.replace(/^\/+/, '')}`;
                             const parts = dep.split('/').filter(Boolean);
                             const file = parts.pop();
                             const parent = parts.length > 0 ? parts[parts.length - 1] : '';
@@ -153,7 +156,14 @@ export default function AssetDetailsClient({ params }: { params: Promise<{ categ
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-0.5 text-blue-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
-                                <span className="break-all">{parent ? `${parent}/` : ''}{file}</span>
+                                <a
+                                  href={url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="break-all text-blue-300 underline hover:text-blue-400"
+                                >
+                                  {parent ? `${parent}/` : ''}{file}
+                                </a>
                               </div>
                             );
                           })}
