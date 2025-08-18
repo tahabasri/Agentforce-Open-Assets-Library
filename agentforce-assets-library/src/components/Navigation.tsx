@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import { useSearch, searchAssets } from '@/context/SearchContext';
 import SearchResults from '@/components/SearchResults';
 import { GlassNavItem, GlassInput } from '@/components/glass';
-import Link from 'next/link';
 
 const categories = [
   { name: 'Home', icon: '🏠', path: '/' },
