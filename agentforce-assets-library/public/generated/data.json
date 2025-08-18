@@ -12,7 +12,8 @@
           "category": "industries",
           "categoryName": "Automotive",
           "assetType": "actions",
-          "fileName": "getVehicleDetails"
+          "fileName": "getVehicleDetails",
+          "description": "get recent orders by contactId"
         }
       },
       "topics": {},
@@ -61,7 +62,8 @@
           "category": "industries",
           "categoryName": "Healthcare",
           "assetType": "actions",
-          "fileName": "customAction"
+          "fileName": "customAction",
+          "description": "get recent orders by contactId"
         }
       },
       "topics": {},
@@ -158,7 +160,7 @@
       "actions": {},
       "topics": {},
       "agents": {},
-      "icon": "https://agentforce.sfdefacto.com/images/logos/Sales-Revenue-Cloud.png"
+      "icon": "https://agentforce.sfdefacto.com/images/logos/sales-revenue-cloud.png"
     },
     "Sales Cloud": {
       "actions": {},
