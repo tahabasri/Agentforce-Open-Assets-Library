@@ -48,41 +48,46 @@ async function createAssetZip(categoryType, categoryName, assetType, fileName, a
   try {
     const zip = new JSZip();
     
+    // Helper to rewrite asset paths from 'XXX/main' to 'force-app/main'
+    function rewriteAssetPath(assetPath) {
+      // Match 'industries/XXX/main' or 'products/XXX/main' and replace with 'force-app/main'
+      const regex = /^(industries|products)\/([^\/]+)\/main(.*)$/;
+      const match = assetPath.match(regex);
+      if (match) {
+        return 'force-app/main' + match[3];
+      }
+      return assetPath;
+    }
+
     // Add the source file if it exists
     if (assetData.sourceFile) {
       try {
         const sourcePath = path.join(baseDir, assetData.sourceFile);
-        
-        // Check if it's a directory or file
         if (fs.existsSync(sourcePath)) {
           if (fs.statSync(sourcePath).isDirectory()) {
-            // Add entire directory
-            addDirectoryToZip(zip, sourcePath, assetData.sourceFile);
+            // Add entire directory, rewriting paths
+            addDirectoryToZip(zip, sourcePath, rewriteAssetPath(assetData.sourceFile));
           } else {
-            // Add single file
             const content = fs.readFileSync(sourcePath, 'utf-8');
-            zip.file(assetData.sourceFile, content);
+            zip.file(rewriteAssetPath(assetData.sourceFile), content);
           }
         }
       } catch (error) {
         console.error(`Error adding source file ${assetData.sourceFile}:`, error);
       }
     }
-    
+
     // Add dependencies if they exist
     if (assetData.dependencies && Array.isArray(assetData.dependencies)) {
       for (const dependency of assetData.dependencies) {
         try {
           const dependencyPath = path.join(baseDir, dependency);
-          
           if (fs.existsSync(dependencyPath)) {
             if (fs.statSync(dependencyPath).isDirectory()) {
-              // Add entire directory
-              addDirectoryToZip(zip, dependencyPath, dependency);
+              addDirectoryToZip(zip, dependencyPath, rewriteAssetPath(dependency));
             } else {
-              // Add single file
               const content = fs.readFileSync(dependencyPath, 'utf-8');
-              zip.file(dependency, content);
+              zip.file(rewriteAssetPath(dependency), content);
             }
           }
         } catch (error) {
@@ -90,21 +95,6 @@ async function createAssetZip(categoryType, categoryName, assetType, fileName, a
         }
       }
     }
-    
-    // Add a README with asset information
-    const readmeContent = `# ${fileName} Information
-
-## Source File
-${assetData.sourceFile || 'No source file specified'}
-
-${assetData.author ? `## Author\n${assetData.author}\n\n` : ''}${assetData.company ? `## Company\n${assetData.company}\n\n` : ''}
-## Dependencies
-${assetData.dependencies && assetData.dependencies.length > 0 ? 
-  assetData.dependencies.map(dep => `- ${dep}`).join('\n') : 
-  'No dependencies'}
-`;
-
-    zip.file('README.md', readmeContent);
     
     // Generate the zip file
     const zipContent = await zip.generateAsync({ type: 'nodebuffer' });
@@ -124,17 +114,24 @@ ${assetData.dependencies && assetData.dependencies.length > 0 ?
 function addDirectoryToZip(zip, dirPath, zipPath) {
   const items = fs.readdirSync(dirPath);
   
+  // Helper to rewrite asset paths from 'XXX/main' to 'force-app/main'
+  function rewriteAssetPath(assetPath) {
+    const regex = /^(industries|products)\/([^\/]+)\/main(.*)$/;
+    const match = assetPath.match(regex);
+    if (match) {
+      return 'force-app/main' + match[3];
+    }
+    return assetPath;
+  }
   for (const item of items) {
     const itemPath = path.join(dirPath, item);
     const zipItemPath = path.join(zipPath, item);
-    
+    const rewrittenZipItemPath = rewriteAssetPath(zipItemPath);
     if (fs.statSync(itemPath).isDirectory()) {
-      // Recursively add subdirectories
-      addDirectoryToZip(zip, itemPath, zipItemPath);
+      addDirectoryToZip(zip, itemPath, rewrittenZipItemPath);
     } else {
-      // Add the file
       const content = fs.readFileSync(itemPath);
-      zip.file(zipItemPath, content);
+      zip.file(rewrittenZipItemPath, content);
     }
   }
 }
