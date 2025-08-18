@@ -152,6 +152,27 @@ export default function Home() {
           </div>
         </div>
         
+        {/* Contributors Section */}
+        <div className="py-16">
+          <div className="max-w-5xl mx-auto px-6">
+            <h2 className="text-3xl font-bold mb-6 text-white text-center animate-shimmer">Meet the Contributors</h2>
+            <p className="text-xl text-center text-white/80 mb-8">
+              This project is <span className="font-semibold text-blue-300">purely community driven</span>.
+              <br></br>
+              <span>Every asset, improvement, and idea comes from amazing contributors like you!</span>
+            </p>
+            <div className="flex justify-center">
+              <Image
+              src="https://raw.githubusercontent.com/tahabasri/Agentforce-Open-Assets-Library/refs/heads/main/CONTRIBUTORS.svg"
+              alt="Contributors"
+              width={800}
+              height={200}
+              className="rounded-lg shadow-lg border border-white/20 bg-white/5"
+              />
+            </div>
+          </div>
+        </div>
+
         {/* Use Cases Section */}
         <div className="py-16">
           <div className="max-w-5xl mx-auto px-6">
