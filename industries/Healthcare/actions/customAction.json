@@ -3,6 +3,6 @@
     "author": "Your Name",
     "company": "Your Company",
     "dependencies": [
-        "industries/healthcare/main/default/flows/Custom_Get_Orders_by_Contact.flow-meta.xml"
+        "industries/Healthcare/main/default/flows/Custom_Get_Orders_by_Contact.flow-meta.xml"
     ]
 }
