@@ -104,8 +104,8 @@ export default function Navigation() {
         }`}
       >
         {/* Header with title and close button, only one X button, right-aligned */}
-        <div className="mb-8 flex items-center justify-between">
-          <h2 className="text-white text-2xl font-bold animate-shimmer">Agentforce</h2>
+        <div className="mb-8 flex items-center justify-between animate-shimmer">
+          <h2 className="text-white text-2xl font-bold">Agentforce Assets</h2>
           {mobileMenuOpen && (
             <button
               className="md:hidden text-white ml-2"

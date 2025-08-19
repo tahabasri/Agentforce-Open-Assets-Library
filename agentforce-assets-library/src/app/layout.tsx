@@ -18,6 +18,31 @@ export const metadata: Metadata = {
   title: "Agentforce Open Assets Library",
   description: "A library of Salesforce assets for Agentforce",
   viewport: "width=device-width, initial-scale=1.0",
+  keywords: 'Agentforce, Salesforce, open assets, icons, images, industry assets, product assets, free resources',
+  openGraph: {
+    title: 'Agentforce Open Assets Library',
+    description: 'Explore a curated library of open assets for Agentforce and Salesforce.',
+    url: 'https://agentforce.sfdefacto.com',
+    siteName: 'Agentforce Open Assets Library',
+    images: [
+      {
+        url: '/public/images/hero-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Agentforce Open Assets Library',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Agentforce Open Assets Library',
+    description: 'Discover open-source assets for Agentforce and Salesforce.',
+    site: '@thetahabasri',
+    creator: '@thetahabasri',
+    images: ['/public/images/hero-image.png'],
+  },
 };
 
 export default function RootLayout({
