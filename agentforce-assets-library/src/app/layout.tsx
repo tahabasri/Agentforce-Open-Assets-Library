@@ -4,6 +4,8 @@ import { SelectedProductProvider } from "@/context/SelectedProductContext";
 import { SearchProvider } from "@/context/SearchContext";
 import "./globals.css";
 
+import { GITHUB_PUBLIC_URL } from '@/constants/global';
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
     siteName: 'Agentforce Open Assets Library',
     images: [
       {
-        url: '/public/images/hero-image.png',
+        url: `${GITHUB_PUBLIC_URL}/agentforce-assets-library/public/images/hero-image.png`,
         width: 1200,
         height: 630,
         alt: 'Agentforce Open Assets Library',
@@ -41,7 +43,7 @@ export const metadata: Metadata = {
     description: 'Discover open-source assets for Agentforce and Salesforce.',
     site: '@thetahabasri',
     creator: '@thetahabasri',
-    images: ['/public/images/hero-image.png'],
+    images: [`${GITHUB_PUBLIC_URL}/agentforce-assets-library/public/images/hero-image.png`],
   },
 };
 
