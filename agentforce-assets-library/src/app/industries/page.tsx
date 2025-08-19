@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Navigation from '@/components/Navigation';
-import Image from 'next/image';
+import { IconCloudOff } from '@/utils/iconUtils';
 import Section from '@/components/Section';
 import { AppData } from '@/types';
 import { useSearch } from '@/context/SearchContext';
@@ -147,8 +147,10 @@ export default function Industries() {
               if (!hasAssets) {
                 return (
                   <div className="flex flex-col items-center justify-center py-24">
-                    <Image src="/images/globe.svg" alt="No results" width={96} height={96} style={{marginBottom: '1.5rem', opacity: 0.8}} />
-                    <h3 className="text-2xl font-bold text-white mb-2">No assets found</h3>
+                    <div style={{marginBottom: '1.5rem', width: 96, height: 96}}>
+                      <IconCloudOff />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-2">No results. Our database is sad</h3>
                     <p className="text-white/80 mb-4 text-center">Try changing your filters or check back later for new assets!</p>
                   </div>
                 );

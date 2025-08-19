@@ -14,7 +14,8 @@ import {
   ChevronRight,
   Sparkles,
   Sparkles2,
-  BotSquare
+  BotSquare,
+  CloudOff,
 } from '@deemlol/next-icons';
 
 export const IconHome = () => <House className="w-5 h-5" />;
@@ -33,3 +34,4 @@ export const IconArrow = () => <ChevronRight className="w-4 h-4" />;
 export const IconAction = () => <Sparkles className="w-full h-full text-white" />;
 export const IconTopic = () => <Sparkles2 className="w-full h-full text-white" />;
 export const IconAgent = () => <BotSquare className="w-full h-full text-white" />;
+export const IconCloudOff = () => <CloudOff className="w-full h-full text-white opacity-80" />;
