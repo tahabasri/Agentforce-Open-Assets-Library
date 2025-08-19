@@ -232,9 +232,9 @@ export default function Industries() {
           }
         </div>
         {/* Footer */}
-        <div className="bg-blue-900 text-white py-8 mt-12 w-full">
+        <div className="glass-intense py-8 mt-12 border-t border-white/20">
           <div className="max-w-5xl mx-auto px-6 text-center">
-            <p> a9 {new Date().getFullYear()} Agentforce Open Assets Library</p>
+            <p>&copy; {new Date().getFullYear()} Agentforce Open Assets Library</p>
           </div>
         </div>
       </div>

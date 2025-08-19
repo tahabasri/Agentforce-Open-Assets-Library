@@ -9,6 +9,7 @@ import { getStaticData } from '@/utils/staticData';
 import { downloadAssetFiles } from '@/utils/zipUtils';
 import { generateDeployCommand } from '@/utils/commandUtils';
 import CopyCommand from '@/components/CopyCommand';
+import AssetIcon from '@/components/AssetIcon';
 
 import { GITHUB_PUBLIC_URL } from '@/constants/global';
 
@@ -128,13 +129,24 @@ export default function AssetDetailsClient({ params }: { params: Promise<{ categ
           <div className="max-w-5xl mx-auto">
             <div className="glass p-6 rounded-xl shadow-lg mb-8">
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-                <Image 
-                  src={typeof asset.imageSrc === 'string' ? asset.imageSrc : '/images/action-icon.svg'} 
-                  alt={fileName} 
-                  width={96} 
-                  height={96} 
-                  className="object-contain animate-float" 
-                />
+{typeof asset.imageSrc === 'string' && !asset.imageSrc.includes('action-icon.svg') && 
+                  !asset.imageSrc.includes('topic-icon.svg') && 
+                  !asset.imageSrc.includes('agent-icon.svg') ? (
+                  <Image 
+                    src={asset.imageSrc} 
+                    alt={fileName} 
+                    width={96} 
+                    height={96} 
+                    className="object-contain animate-float" 
+                  />
+                ) : (
+                  <AssetIcon 
+                    assetType={Array.isArray(asset.assetType) ? asset.assetType[0] : (asset.assetType || 'actions')} 
+                    width={96} 
+                    height={96} 
+                    className="animate-float" 
+                  />
+                )}
                 <div>
                   <h2 className="text-2xl font-bold text-white mb-2">{toSentenceCase(fileName.replace(/_/g, ' '))}</h2>
                   <p className="text-white/90 mb-4">{asset.description || 'No description available.'}</p>

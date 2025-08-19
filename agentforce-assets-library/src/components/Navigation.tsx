@@ -5,11 +5,12 @@ import { usePathname } from 'next/navigation';
 import { useSearch, searchAssets } from '@/context/SearchContext';
 import SearchResults from '@/components/SearchResults';
 import { GlassNavItem, GlassInput } from '@/components/glass';
+import { IconHome, IconProducts, IconIndustries, IconSearch, IconClose, IconMenu, IconExternalLink } from '@/utils/iconUtils';
 
 const categories = [
-  { name: 'Home', icon: '🏠', path: '/' },
-  { name: 'Products', icon: '📦', path: '/products' },
-  { name: 'Industries', icon: '🏭', path: '/industries' },
+  { name: 'Home', icon: <IconHome />, path: '/' },
+  { name: 'Products', icon: <IconProducts />, path: '/products' },
+  { name: 'Industries', icon: <IconIndustries />, path: '/industries' },
 ];
 
 export default function Navigation() {
@@ -78,20 +79,7 @@ export default function Navigation() {
             onClick={() => setMobileMenuOpen(true)}
             aria-label="Open menu"
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
+            <IconMenu />
           </button>
         </div>
       )}
@@ -112,20 +100,7 @@ export default function Navigation() {
               onClick={() => setMobileMenuOpen(false)}
               aria-label="Close menu"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              <IconClose />
             </button>
           )}
         </div>
@@ -135,7 +110,7 @@ export default function Navigation() {
               key={category.name}
               href={category.path}
               isActive={pathname === category.path}
-              icon={<span>{category.icon}</span>}
+              icon={category.icon}
             >
               {category.name}
             </GlassNavItem>
@@ -147,17 +122,7 @@ export default function Navigation() {
             placeholder={isFilterPage ? "Filter assets..." : "Search assets..."}
             value={searchTerm}
             onChange={handleSearchChange}
-            icon={
-              <svg 
-                className="h-4 w-4" 
-                xmlns="http://www.w3.org/2000/svg" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            }
+            icon={<IconSearch />}
           />
         </div>
         <div className="space-y-3 mb-6">
@@ -166,9 +131,7 @@ export default function Navigation() {
             <a href="https://developer.salesforce.com/docs/einstein/genai/guide/agent-dx-modify.html" 
                target="_blank" 
                className="flex items-center text-blue-300 hover:text-white mt-2">
-              <svg className="w-4 h-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clipRule="evenodd" />
-              </svg>
+              <span className="mr-1"><IconExternalLink /></span>
               Developer Documentation
             </a>
           </div>

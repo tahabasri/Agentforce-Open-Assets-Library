@@ -1,6 +1,8 @@
 'use client';
 
 import Image from 'next/image';
+import { IconStar, IconExternalLink } from '@/utils/iconUtils';
+import AssetIcon from '@/components/AssetIcon';
 
 interface StarRatingProps {
   rating: number;
@@ -23,18 +25,9 @@ const StarRating: React.FC<StarRatingProps> = ({ rating, count }) => {
   return (
     <div className="flex items-center">
       {[1, 2, 3, 4, 5].map((star) => (
-        <svg
-          key={star}
-          className={`w-4 h-4 ${
-            star <= Math.round(rating) ? 'text-yellow-300 animate-pulse-glow' : 'text-white/30'
-          }`}
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 22 20"
-        >
-          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-        </svg>
+        <span key={star} className={star <= Math.round(rating) ? 'text-yellow-300 animate-pulse-glow' : 'text-white/30'}>
+          <IconStar />
+        </span>
       ))}
       <span className="ml-1 text-sm font-medium text-white/90">
         {rating.toFixed(2)} ({count})
@@ -59,13 +52,21 @@ export default function Card({
       {imageSrc && (
         <div className="mb-3 sm:mb-0 sm:mr-4 flex-shrink-0 flex sm:block justify-center">
           <div className="w-14 h-14 sm:w-16 sm:h-16 bg-blue-600/30 glass-light rounded-lg overflow-hidden flex items-center justify-center animate-float">
-            <Image
-              src={imageSrc}
-              alt={title}
-              width={48}
-              height={48}
-              className="object-contain"
-            />
+{imageSrc.includes('action-icon.svg') ? (
+              <AssetIcon assetType="actions" width={48} height={48} />
+            ) : imageSrc.includes('topic-icon.svg') ? (
+              <AssetIcon assetType="topics" width={48} height={48} />
+            ) : imageSrc.includes('agent-icon.svg') ? (
+              <AssetIcon assetType="agents" width={48} height={48} />
+            ) : (
+              <Image
+                src={imageSrc}
+                alt={title}
+                width={48}
+                height={48}
+                className="object-contain"
+              />
+            )}
           </div>
         </div>
       )}
@@ -92,7 +93,9 @@ export default function Card({
         )}
         {/* View details button below Integration Difficulty */}
         {href && (
-          <a href={href} className="inline-block mt-2 text-xs text-white/60 hover:underline">View details →</a>
+          <a href={href} className="inline-flex items-center gap-1 mt-2 text-xs text-white/60 hover:underline">
+            View details <IconExternalLink />
+          </a>
         )}
         {rating && <StarRating rating={rating.rating} count={rating.count} />}
         <p className="mt-2 text-xs sm:text-sm text-white/90 line-clamp-2 sm:line-clamp-3">

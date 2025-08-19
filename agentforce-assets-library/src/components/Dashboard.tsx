@@ -1,8 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Section from '@/components/Section';
+import { useState, useEffect } from 'react';
 import { AppData } from '@/types';
+import { getStaticData } from '@/utils/staticData';
+import Section from '@/components/Section';
+import AssetIcon from '@/components/AssetIcon';
 
 export default function Dashboard() {
   const [data, setData] = useState<AppData | null>(null);

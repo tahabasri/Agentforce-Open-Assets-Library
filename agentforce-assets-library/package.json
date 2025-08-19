@@ -12,6 +12,7 @@
     "generate-assets": "node scripts/generateAssetBundles.mjs"
   },
   "dependencies": {
+    "@deemlol/next-icons": "^0.1.9",
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
     "liquid-glass-ui": "^1.0.0",

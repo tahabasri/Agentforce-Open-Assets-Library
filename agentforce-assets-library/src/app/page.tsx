@@ -6,6 +6,7 @@ import { useSelectedProduct } from '@/context/SelectedProductContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
+import AssetIcon from '@/components/AssetIcon';
 import { AppData } from '@/types';
 import { getStaticData } from '@/utils/staticData';
 
@@ -184,12 +185,11 @@ export default function Home() {
               {/* Actions Card */}
               <div className="glass-interactive glass rounded-xl overflow-hidden animate-float">
                 <div className="h-40 bg-blue-600/70 backdrop-blur-md flex items-center justify-center">
-                  <Image 
-                    src="/images/action-icon.svg" 
-                    alt="Actions" 
-                    width={80} 
-                    height={80} 
-                    className="text-white animate-pulse-glow"
+                  <AssetIcon 
+                    assetType="actions" 
+                    width={80}
+                    height={80}
+                    className="animate-pulse-glow"
                   />
                 </div>
                 <div className="p-6">
@@ -204,12 +204,11 @@ export default function Home() {
               {/* Topics Card */}
               <div className="glass-interactive glass rounded-xl overflow-hidden animate-float" style={{ animationDelay: '0.3s' }}>
                 <div className="h-40 bg-green-600/70 backdrop-blur-md flex items-center justify-center">
-                  <Image 
-                    src="/images/topic-icon.svg" 
-                    alt="Topics" 
-                    width={80} 
-                    height={80} 
-                    className="text-white animate-pulse-glow"
+                  <AssetIcon 
+                    assetType="topics" 
+                    width={80}
+                    height={80}
+                    className="animate-pulse-glow"
                   />
                 </div>
                 <div className="p-6">
@@ -224,9 +223,8 @@ export default function Home() {
               {/* Agents Card */}
               <div className="glass-interactive glass rounded-xl overflow-hidden animate-float" style={{ animationDelay: '0.6s' }}>
                 <div className="h-40 bg-purple-600/70 backdrop-blur-md flex items-center justify-center">
-                  <Image 
-                    src="/images/agent-icon.svg" 
-                    alt="Agents" 
+                  <AssetIcon 
+                    assetType="agents" 
                     width={80} 
                     height={80} 
                     className="text-white animate-pulse-glow"
@@ -306,7 +304,7 @@ export default function Home() {
         {/* Footer */}
         <div className="glass-intense py-8 mt-12 border-t border-white/20">
           <div className="max-w-5xl mx-auto px-6 text-center">
-            <p className="text-white/80">© {new Date().getFullYear()} Agentforce Open Assets Library</p>
+            <p className="text-white/80">&copy; {new Date().getFullYear()} Agentforce Open Assets Library</p>
           </div>
         </div>
       </div>
